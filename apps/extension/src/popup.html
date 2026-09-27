@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIH26171 Agent</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <div class="logo-row">
+        <span class="logo-icon">🛡️</span>
+        <h1>Privacy Agent</h1>
+      </div>
+      <span class="version-badge">v0.1.0</span>
+    </header>
+
+    <section class="task-section">
+      <label for="task-goal">Task Goal</label>
+      <textarea id="task-goal" rows="3" placeholder="e.g. Find and click the Download button..."></textarea>
+
+      <div class="option-row">
+        <label for="max-steps">Max Steps</label>
+        <input type="number" id="max-steps" value="5" min="1" max="20">
+      </div>
+
+      <button id="run-btn" class="btn-primary">▶ Run Agent</button>
+      <button id="stop-btn" class="btn-danger" disabled>⏹ Stop</button>
+    </section>
+
+    <section class="status-section" id="status-section" style="display:none;">
+      <div class="status-bar">
+        <span id="status-text">Idle</span>
+        <span id="step-counter" class="step-badge"></span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </section>
+
+    <section class="confirmation-section" id="confirmation-section" style="display:none;">
+      <div class="confirmation-card">
+        <h3>⚠️ Confirmation Required</h3>
+        <p id="confirmation-text"></p>
+        <div class="confirmation-actions">
+          <button id="confirm-yes" class="btn-primary">✓ Allow</button>
+          <button id="confirm-no" class="btn-danger">✕ Deny</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="settings-section">
+      <details>
+        <summary>⚙ Settings</summary>
+        <div class="settings-grid">
+          <label>Server Endpoint</label>
+          <input type="text" id="server-endpoint" value="http://localhost:3001/api/agent">
+
+          <label>Mock Mode</label>
+          <input type="checkbox" id="mock-mode" checked>
+
+          <label>Confidence Threshold</label>
+          <input type="range" id="confidence-threshold" min="0" max="100" value="50">
+          <span id="confidence-value">0.50</span>
+
+          <button id="save-settings" class="btn-secondary">Save Settings</button>
+        </div>
+      </details>
+    </section>
+
+    <section class="log-section">
+      <details>
+        <summary>📋 Audit Log (<span id="log-count">0</span>)</summary>
+        <div id="audit-log" class="audit-log"></div>
+      </details>
+    </section>
+
+    <footer class="popup-footer">
+      <a href="#" id="open-sidepanel">Open Side Panel →</a>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

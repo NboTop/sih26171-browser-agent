@@ -1,0 +1,25 @@
+{
+  "name": "@sih26171/extension",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build:chrome": "node scripts/build.mjs --target chrome",
+    "build:firefox": "node scripts/build.mjs --target firefox",
+    "build": "npm run build:chrome && npm run build:firefox",
+    "dev": "node scripts/build.mjs --target chrome --watch",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@sih26171/protocol": "*",
+    "@sih26171/privacy": "*",
+    "@sih26171/perception": "*",
+    "@sih26171/policy": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "esbuild": "^0.23.0",
+    "vitest": "^2.0.0",
+    "jsdom": "^24.0.0",
+    "@vitest/coverage-v8": "^2.0.0"
+  }
+}

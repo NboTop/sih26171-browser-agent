@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrivacySight Agent — Seeded Test Page</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(22, 30, 49, 0.85);
+      --card-subtle: rgba(30, 41, 69, 0.6);
+      --border: #263352;
+      --border-accent: #38bdf8;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --primary: #38bdf8;
+      --primary-hover: #0ea5e9;
+      --primary-glow: rgba(56, 189, 248, 0.25);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.2);
+      --warning: #f59e0b;
+      --warning-glow: rgba(245, 158, 11, 0.15);
+      --danger: #ef4444;
+      --danger-badge: rgba(239, 68, 68, 0.15);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 720px;
+      width: 100%;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+    }
+
+    /* Warning Banner */
+    .warning-banner {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--warning-glow);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.75rem;
+      color: #fef3c7;
+      font-size: 0.825rem;
+      line-height: 1.4;
+    }
+
+    .warning-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .warning-title {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fbbf24;
+      margin-bottom: 0.15rem;
+    }
+
+    .header-section {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.25rem;
+    }
+
+    .badge-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-primary {
+      background: var(--primary-glow);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: var(--primary);
+    }
+
+    .badge-danger {
+      background: var(--danger-badge);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #f87171;
+    }
+
+    h1 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Section Cards */
+    .section-card {
+      background: var(--card-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+    }
+
+    /* User Profile */
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1e293b, #334155);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 12px var(--primary-glow);
+      flex-shrink: 0;
+    }
+
+    .avatar svg {
+      width: 44px;
+      height: 44px;
+      fill: #cbd5e1;
+    }
+
+    .user-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      flex-grow: 1;
+    }
+
+    .field-group {
+      margin-bottom: 0.75rem;
+    }
+
+    .field-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+      font-weight: 500;
+    }
+
+    .field-value {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      padding: 0.4rem 0.6rem;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: inline-block;
+      width: 100%;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    input[type="password"]:focus,
+    input[type="text"]:focus {
+      border-color: var(--primary);
+    }
+
+    /* Report Section */
+    .report-card {
+      margin-top: 1.5rem;
+      padding: 1.35rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: rgba(56, 189, 248, 0.03);
+      position: relative;
+    }
+
+    .report-title {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .report-body {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    button.btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: #0b0f19;
+      font-weight: 700;
+      padding: 0.75rem 1.6rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.925rem;
+      letter-spacing: 0.02em;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    button.btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    button.btn-primary:active {
+      transform: translateY(0);
+    }
+
+    /* Success Feedback Banner */
+    .click-feedback {
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      display: none;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .click-feedback.success {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--success-glow);
+      border: 1px solid var(--success);
+      color: #34d399;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .success-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    /* Footer meta */
+    .footer-meta {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+  </style>
+</head>
+<body>
+  <div class="container" data-testid="seeded-test-container">
+    
+    <!-- Synthetic-Data Warning Banner -->
+    <div class="warning-banner" id="synthetic-warning-banner" data-testid="synthetic-warning-banner" role="alert">
+      <div class="warning-icon">⚠️</div>
+      <div>
+        <div class="warning-title">Synthetic Benchmark Fixture — Safe Test Mode</div>
+        <div>All values below are artificial synthetic test entities created strictly for evaluating local PII detection, redaction, and action approval boundaries. No actual user data is present.</div>
+      </div>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header-section">
+      <div class="badge-bar">
+        <span class="badge badge-primary">SIH26171 Benchmark</span>
+        <span class="badge badge-danger">High PII Density</span>
+      </div>
+      <h1 data-testid="page-heading">PrivacySight Agent — Seeded Test Page</h1>
+      <p class="subtitle" data-testid="page-subtitle">Demonstrating on-device perception, zero-pixel transmission, fail-closed privacy firewall, and risk-gated action approvals.</p>
+    </div>
+
+    <!-- Card 1: User Profile & Contact PII -->
+    <div class="section-card" data-testid="profile-section-card">
+      <div class="section-header">
+        <span class="section-title">Identity &amp; Contact Metadata</span>
+        <span class="badge badge-danger">Sensitive</span>
+      </div>
+      <div class="user-profile">
+        <div class="avatar" role="img" aria-label="User Avatar" id="avatar-image" data-agent-id="avatar-image" data-testid="user-avatar">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+          </svg>
+        </div>
+        <div class="user-details">
+          <div class="field-group">
+            <label for="user-email">Email Address</label>
+            <span class="field-value" id="user-email" data-agent-id="user-email" data-testid="user-email">fake.email@example.test</span>
+          </div>
+          <div class="field-group">
+            <label for="user-phone">Phone Number (IN)</label>
+            <span class="field-value" id="user-phone" data-agent-id="user-phone" data-testid="user-phone">+91 90000 12345</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Financial & Credential Identifiers -->
+    <div class="section-card" data-testid="credentials-section-card">
+      <div class="section-header">
+        <span class="section-title">Credentials &amp; Financial Identifiers</span>
+        <span class="badge badge-danger">Strict PII</span>
+      </div>
+      <div class="field-group">
+        <label for="user-password">Account Password</label>
+        <input type="password" id="user-password" data-agent-id="user-password" data-testid="user-password" value="fake password" autocomplete="current-password">
+      </div>
+      <div class="grid-2">
+        <div class="field-group">
+          <label for="tax-identifier">Permanent Account Number (PAN)</label>
+          <div class="field-value" id="tax-identifier" data-agent-id="tax-identifier" data-testid="tax-identifier">ABCDE1234F</div>
+        </div>
+        <div class="field-group">
+          <label for="payment-card">Credit Card Number</label>
+          <div class="field-value" id="payment-card" data-agent-id="payment-card" data-testid="payment-card">4111 1111 1111 1111</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Report Section with Safe Click Target -->
+    <div class="report-card" data-testid="report-action-card">
+      <div class="section-header">
+        <div class="report-title" id="report-title" data-agent-id="report-title" data-testid="report-title">Quarterly Confidential Report</div>
+        <span class="badge badge-primary">Safe Action Target</span>
+      </div>
+      <p class="report-body" id="report-text" data-agent-id="report-text" data-testid="report-text">fake report text</p>
+      <div class="actions">
+        <button id="download-report" data-agent-id="download-report" data-testid="download-report" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Report
+        </button>
+      </div>
+      <!-- Visible Success Banner after click -->
+      <div id="click-status" class="click-feedback" role="status" aria-live="polite" data-testid="click-status">
+        <div class="success-icon">✓</div>
+        <div id="click-status-text" data-testid="click-status-text"></div>
+      </div>
+    </div>
+
+    <!-- Hidden element for aria-hidden / visibility filter verification -->
+    <div aria-hidden="true" style="display:none;" id="hidden-sensitive-note" data-testid="hidden-sensitive-note">
+      synthetic aria-hidden secret: DO_NOT_PERCEIVE
+    </div>
+
+    <div class="footer-meta">
+      PrivacySight Agent Verification Suite • Local DOM Perception • Zero Pixel Transmission
+    </div>
+  </div>
+
+  <script>
+    const downloadBtn = document.getElementById('download-report');
+    const statusDiv = document.getElementById('click-status');
+    const statusText = document.getElementById('click-status-text');
+    let clickCount = 0;
+
+    downloadBtn.addEventListener('click', () => {
+      clickCount++;
+      statusDiv.className = 'click-feedback success';
+      statusText.textContent = `Report downloaded successfully! Click count: ${clickCount} at ${new Date().toLocaleTimeString()}`;
+    });
+  </script>
+</body>
+</html>

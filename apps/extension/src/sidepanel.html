@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrivacySight Agent — Side Panel</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="popup-container sidepanel-container">
+    
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="logo-row">
+        <span class="logo-icon">🛡️</span>
+        <div>
+          <h1>PrivacySight Agent</h1>
+          <div class="header-sub">On-Device Visual Perception • SIH26171</div>
+        </div>
+      </div>
+      <span class="version-badge" id="sp-reasoner-mode">Local deterministic reasoner — demo mode</span>
+    </header>
+
+    <!-- Scanner & Quick Action -->
+    <section class="scan-section">
+      <button id="sp-scan-btn" class="btn-scan">
+        <span class="scan-icon">🔍</span>
+        <span>Scan Active Page</span>
+      </button>
+      <div id="sp-scan-meta" class="scan-meta">Ready to inspect DOM &amp; PII boundary</div>
+    </section>
+
+    <!-- Privacy HUD (Phase 1C requirement) -->
+    <section class="privacy-hud-section" id="sp-privacy-hud" data-testid="privacy-hud">
+      <div class="hud-header">
+        <div class="hud-title-row">
+          <span class="hud-title">Privacy Firewall</span>
+          <span id="sp-firewall-status" class="badge-firewall badge-firewall-pass" data-testid="firewall-status">PASS</span>
+        </div>
+        <div class="hud-subtitle" id="sp-reasoner-label">Local deterministic reasoner — demo mode</div>
+      </div>
+
+      <!-- Zero-Transmission Guarantees -->
+      <div class="hud-guarantees-grid">
+        <div class="guarantee-tile">
+          <div class="guarantee-label">Raw DOM Values</div>
+          <div class="guarantee-val val-no" id="sp-hud-raw-dom">NO</div>
+        </div>
+        <div class="guarantee-tile">
+          <div class="guarantee-label">Raw Pixels Sent</div>
+          <div class="guarantee-val val-no" id="sp-hud-raw-pixels">NO</div>
+        </div>
+        <div class="guarantee-tile">
+          <div class="guarantee-label">Cookies/Secrets</div>
+          <div class="guarantee-val val-no" id="sp-hud-secrets">NO</div>
+        </div>
+      </div>
+
+      <!-- DOM Perception & Accessibility Filtering -->
+      <div class="hud-counts-card">
+        <div class="hud-counts-title">Perception Filtering (Aria &amp; Visibility)</div>
+        <div class="counts-row">
+          <div class="count-item">
+            <span class="count-number" id="sp-retained-count">0</span>
+            <span class="count-caption">Retained</span>
+          </div>
+          <div class="count-item">
+            <span class="count-number count-dropped" id="sp-dropped-count">0</span>
+            <span class="count-caption">Dropped (Hidden)</span>
+          </div>
+          <div class="count-item">
+            <span class="count-number" id="sp-scanned-count">0</span>
+            <span class="count-caption">Total Scanned</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sensitive Entity Categories Detected Locally -->
+      <div class="hud-sensitive-card">
+        <div class="hud-sensitive-header">
+          <span>Sensitive Items Detected Locally</span>
+          <span class="sensitive-total" id="sp-sensitive-total">0 items</span>
+        </div>
+        <div class="sensitive-tags-container" id="sp-sensitive-tags">
+          <span class="empty-sensitive-hint">Click &ldquo;Scan Active Page&rdquo; to analyze</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task Flow (Phase 1D requirement) -->
+    <section class="task-section">
+      <label for="sp-task-goal">Agent Task Input</label>
+      <textarea id="sp-task-goal" rows="2" placeholder="e.g. Click Download Report button">Click Download Report</textarea>
+      
+      <div class="task-btn-row">
+        <button id="sp-run-btn" class="btn-primary" data-testid="sp-run-btn">▶ Run Task</button>
+        <button id="sp-stop-btn" class="btn-danger" disabled>⏹ Stop</button>
+      </div>
+    </section>
+
+    <!-- Status & Progress -->
+    <section class="status-section" id="sp-status-section" style="display:none;">
+      <div class="status-bar">
+        <span id="sp-status-text">Idle</span>
+        <span id="sp-step-counter" class="step-badge">1/1</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="sp-progress-fill" style="width:0%"></div>
+      </div>
+    </section>
+
+    <!-- High-Risk Action Approval Card (Phase 1E requirement) -->
+    <section class="approval-section" id="sp-approval-section" style="display:none;" data-testid="sp-approval-section">
+      <div class="approval-card">
+        <div class="approval-header">
+          <span class="approval-alert-icon">⚠️</span>
+          <div>
+            <div class="approval-title">High-Risk Action Approval Required</div>
+            <div class="approval-subtitle">Local policy requires human confirmation before execution</div>
+          </div>
+        </div>
+
+        <div class="approval-details-table">
+          <div class="detail-row">
+            <span class="detail-label">Action:</span>
+            <span class="detail-val" id="sp-approval-action">click</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Target:</span>
+            <span class="detail-val highlight-target" id="sp-approval-target">Download Report</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Risk Level:</span>
+            <span class="badge-risk-high" id="sp-approval-risk">HIGH</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Reason:</span>
+            <span class="detail-val reason-text" id="sp-approval-reason">This action may create a file.</span>
+          </div>
+        </div>
+
+        <div class="approval-actions">
+          <button id="sp-approve-btn" class="btn-approve" data-testid="sp-approve-btn">
+            ✓ Approve and execute
+          </button>
+          <button id="sp-cancel-btn" class="btn-cancel" data-testid="sp-cancel-btn">
+            ✕ Cancel
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audit Log -->
+    <section class="log-section">
+      <details open>
+        <summary>📋 Audit Log (<span id="sp-log-count">0</span> events — no secrets stored)</summary>
+        <div id="sp-audit-log" class="audit-log" data-testid="sp-audit-log"></div>
+      </details>
+    </section>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

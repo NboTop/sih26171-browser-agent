@@ -1,0 +1,19 @@
+{
+  "name": "@sih26171/evaluation",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "evaluate": "tsx src/run-evaluation.ts"
+  },
+  "dependencies": {
+    "@sih26171/protocol": "*",
+    "@sih26171/privacy": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "tsx": "^4.0.0"
+  }
+}

@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Temporary and local environments
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+dist/
+**/dist/
+build/
+out/
+*.tsbuildinfo
+
+# Test and coverage artifacts
+coverage/
+.nyc_output/
+*.log
+
+# Browser profile and cache artifacts (NEVER commit browser profiles)
+temp-chrome-profile/
+temp-*/
+
+# OS generated files
+.DS_Store
+Thumbs.db

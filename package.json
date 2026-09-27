@@ -1,0 +1,27 @@
+{
+  "name": "sih26171-browser-agent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Privacy-preserving visual browser agent – SIH 2026",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build:packages": "npm run build --workspace=@sih26171/protocol && npm run build --workspace=@sih26171/privacy && npm run build --workspace=@sih26171/perception && npm run build --workspace=@sih26171/policy && npm run build --workspace=@sih26171/evaluation",
+    "build:apps": "npm run build --workspace=@sih26171/server && npm run build --workspace=@sih26171/extension",
+    "build": "npm run build:packages && npm run build:apps",
+    "test": "npm run test --workspaces --if-present",
+    "evaluate": "npm run evaluate --workspace=@sih26171/evaluation",
+    "build:extension:chrome": "npm run build:chrome --workspace=apps/extension",
+    "build:extension:firefox": "npm run build:firefox --workspace=apps/extension",
+    "dev:server": "npm run dev --workspace=apps/server",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "eslint": "^9.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.1.9"
+  }
+}
